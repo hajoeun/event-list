@@ -8,8 +8,13 @@ ul >li.card {
   margin-bottom: 8px;
 }
 
-li.card img.banner_img {
+li.card .img.banner {
   width: 100%
+}
+
+li.card .blank.banner {
+  height: 200px;
+  background: #ccc;
 }
 
 li.card >a.wrapper {
@@ -24,8 +29,7 @@ a.wrapper >.card_footer {
   color: #212529;
   font-size: 14px;
   font-weight: 700;
-  margin: 0;
-  margin-bottom: 5px;
+  margin: 0 0 5px 0;
 }
 
 .card_footer >.sub_title {

@@ -6,8 +6,11 @@ import CardItem from './components/CardItem';
 class App extends Component {
   constructor(props) {
     super(props);
+    this.visibleSize = 4;
     this.state = {
-      event: null
+      items: null,
+      visibleLength: (this.visibleSize * 2),
+      itemsLength: 0
     }
   }
 
@@ -39,27 +42,33 @@ class App extends Component {
     //   .then(data => this.setState({ data }))
     fetch('https://api.ddocdoc.com/v2/eventBanner?populate=true')
       .then(res => res.json())
-      .then(event => this.setState({ event }));
+      .then(event => this.setState({ items: event.items, itemsLength: event.items.length }))
+      .then(() => {
+        window.addEventListener('scroll', () => {
+          const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
+          const percent = scrollTop / (scrollHeight - clientHeight);
+          const updatePosition = (this.state.visibleLength / this.state.itemsLength) - 0.1;
+
+          if (percent > updatePosition) {
+            this.setState(prev => {
+              const visibleLength = prev.visibleLength + (prev.visibleLength > prev.itemsLength ? 0 : this.visibleSize);
+              return { visibleLength };
+            })
+          }
+
+        });
+      });
   }
   render() {
-
-// active: true
-// detailImage: {size: {…}, url: "https://cdn.ddocdoc.com/eventBanner/15460071827b7dbc9914c99c0.png"}
-// endDate: null
-// groupId: {_id: "5bcec35e62b6c70eb5b5ebeb", title: "다른덴 절대 없어! 오직 똑닥에만 있는 이벤트!", description: "똑닥 아니면 이런 이벤트 어디서 또 만나?"}
-// mainImage: {size: {…}, url: "https://cdn.ddocdoc.com/eventBanner/154552616c1af33f52e91cdc9.png"}
-// startDate: null
-// title: "[오똑] 오직 똑닥에만 있는 시크릿 이벤트!"
-// https://event.ddocdoc.com/curation/{curationID}
-
     return (
       <Fragment>
         <div className="header"></div>
         <div className="content">
-          <ul>{this.state.event && this.state.event.items.map((item, i) =>
-            <CardItem key={i} item={item}></CardItem>)}
+          <ul>{this.state.items && this.state.items.map((item, i) =>
+            <CardItem key={i} item={item} idx={i} visibleLength={this.state.visibleLength}></CardItem>)}
           </ul>
         </div>
+        <div className="footer"></div>
       </Fragment>
     );
   }
