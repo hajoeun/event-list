@@ -12,9 +12,16 @@ li.card .img.banner {
   width: 100%
 }
 
+@keyframes loading {
+  from { background-color: #666; }
+  to { background-color: #ccc; }
+}
+
 li.card .blank.banner {
-  height: 200px;
-  background: #ccc;
+  height: 150px;
+  animation: loading 1s infinite;
+  animation-direction: alternate;
+  animation-timing-function: ease;
 }
 
 li.card >a.wrapper {
