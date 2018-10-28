@@ -1,19 +1,17 @@
 import React, { Component, Fragment } from 'react';
 import '../css/App.css';
+import Header from './Header';
+import Body from './Body';
+import Footer from './Footer';
 import EventContainer from '../containers/EventContainer';
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-  }
   render() {
     return (
       <Fragment>
-        <div className="header"></div>
-        <div className="content">
-          <EventContainer />
-        </div>
-        <div className="footer"></div>
+        <Header/>
+        <Body Contents={<EventContainer/>}/>
+        <Footer/>
       </Fragment>
     );
   }

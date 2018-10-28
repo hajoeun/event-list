@@ -2,10 +2,9 @@ import React from 'react';
 
 const EventItem = ({ item, idx, visibleLength }) => (
   <li className="card" idx={idx}>
-    <a href={`/curation/${item.groupId._id}`} className="wrapper">
-      { idx <= visibleLength ?
-      <img src={item.mainImage.url} alt={item.title} className="img banner"/> :
-      <div className="blank banner"> </div>}
+    <a href={`/curation/${item.groupId._id}`} className="wrapper">{idx <= visibleLength?
+      <img src={item.mainImage.url} alt={item.title} className="img banner"/>:
+      <div className="blank banner"/>}
       <div className="card_footer">
         <h5 className="title">{item.title}</h5>
         <div className="sub_title">
