@@ -4,7 +4,7 @@ import EventItem from '../components/EventItem';
 class EventContainer extends Component {
   constructor(props) {
     super(props);
-    this.visibleSize = 4;
+    this.visibleDiff = 4;
     this.visibleInit = 8;
     this.state = {
       items: null,
@@ -32,7 +32,7 @@ class EventContainer extends Component {
   checkState = () =>
     this.state.visibleLength < this.state.itemsLength;
   setVisibleLength = () =>
-    this.setState(prev => ({ visibleLength: prev.visibleLength + this.visibleSize }));
+    this.setState(prev => ({ visibleLength: prev.visibleLength + this.visibleDiff }));
 
   render() {
     const { items, visibleLength } = this.state;
